@@ -78,7 +78,7 @@ export default async function OgImage(req: NextRequest) {
               tw="text-left"
               style={{
                 fontSize: titleLength <= 20 ? 100 : 80,
-                paddingRight: 240,
+                paddingRight: 260,
                 fontWeight: 800,
                 paddingBottom: 40,
               }}
