@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { ImageResponse } from '@vercel/og';
 import type { NextRequest } from 'next/server';
 
@@ -29,8 +30,11 @@ export default async function OgImage(req: NextRequest) {
       ? searchParams.get('title')!.slice(0, 100)
       : 'Front end engineer that loves building tools';
 
-    const type = searchParams.get('type');
+    const heading = searchParams.get('heading') || searchParams.get('type');
     const date = searchParams.get('date');
+    const bgImage = searchParams.get('bgImage');
+    const borderColor = searchParams.get('borderColor');
+    const primaryColor = borderColor || '14b8a6';
 
     const titleLength = title.length;
 
@@ -47,14 +51,33 @@ export default async function OgImage(req: NextRequest) {
             fontFamily: '"Inter"',
           }}
         >
-          <div tw="absolute top-0 bottom-0 left-0 bg-teal-500 w-6" />
+          <div
+            tw="absolute top-0 bottom-0 left-0 w-6"
+            style={{
+              backgroundColor: `#${primaryColor}`,
+            }}
+          />
+          {bgImage && (
+            <img
+              src={bgImage}
+              width={500}
+              height={500}
+              tw="absolute"
+              style={{
+                right: 30,
+                top: 50,
+                opacity: '0.2',
+              }}
+              alt=""
+            />
+          )}
           <div
             style={{ height: 60 }}
             tw="flex justify-between items-center w-full pl-12 pr-6"
           >
-            {type ? (
+            {heading ? (
               <div tw="text-2xl text-gray-700" style={{ fontWeight: 600 }}>
-                {type.toUpperCase()}
+                {heading.toUpperCase()}
               </div>
             ) : (
               <div />
@@ -101,10 +124,10 @@ export default async function OgImage(req: NextRequest) {
               height: 260,
               right: 14,
               bottom: 2,
+              borderColor: `#${primaryColor}`,
             }}
-            tw="absolute rounded-full border-4 border-teal-300"
+            tw="absolute rounded-full border-4"
           />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
             src="https://github.com/malcolm-kee.png"
