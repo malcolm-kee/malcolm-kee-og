@@ -60,13 +60,13 @@ export default async function OgImage(req: NextRequest) {
           {bgImage && (
             <img
               src={bgImage}
-              width={500}
               height={500}
               tw="absolute"
               style={{
                 right: 30,
                 top: 50,
                 opacity: '0.2',
+                objectFit: 'cover',
               }}
               alt=""
             />
