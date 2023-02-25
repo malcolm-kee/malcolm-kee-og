@@ -3,7 +3,7 @@ import { ImageResponse } from '@vercel/og';
 import type { NextRequest } from 'next/server';
 
 export const config = {
-  runtime: 'experimental-edge',
+  runtime: 'edge',
 };
 
 const font = fetch(
@@ -57,6 +57,12 @@ export default async function OgImage(req: NextRequest) {
               backgroundColor: `#${primaryColor}`,
             }}
           />
+          <div
+            tw="absolute top-0 bottom-0 right-0 w-6"
+            style={{
+              backgroundColor: `#${primaryColor}`,
+            }}
+          />
           {bgImage && (
             <img
               src={bgImage}
@@ -73,7 +79,7 @@ export default async function OgImage(req: NextRequest) {
           )}
           <div
             style={{ height: 60 }}
-            tw="flex justify-between items-center w-full pl-12 pr-6"
+            tw="flex justify-between items-center w-full px-12"
           >
             {heading ? (
               <div tw="text-2xl text-gray-700" style={{ fontWeight: 600 }}>
@@ -122,7 +128,7 @@ export default async function OgImage(req: NextRequest) {
             style={{
               width: 260,
               height: 260,
-              right: 14,
+              right: 38,
               bottom: 2,
               borderColor: `#${primaryColor}`,
             }}
@@ -133,7 +139,7 @@ export default async function OgImage(req: NextRequest) {
             src="https://github.com/malcolm-kee.png"
             width={240}
             height={240}
-            tw="absolute bottom-3 right-6 rounded-full"
+            tw="absolute bottom-3 right-12 rounded-full"
           />
         </div>
       ),
