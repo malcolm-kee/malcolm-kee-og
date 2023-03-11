@@ -34,7 +34,7 @@ export default async function OgImage(req: NextRequest) {
     const date = searchParams.get('date');
     const bgImage = searchParams.get('bgImage');
     const borderColor = searchParams.get('borderColor');
-    const primaryColor = borderColor || '14b8a6';
+    const primaryColor = (borderColor || '14b8a6').replace(/^#/, '');
 
     const titleLength = title.length;
 
@@ -105,12 +105,15 @@ export default async function OgImage(req: NextRequest) {
           >
             <div
               tw="text-left"
-              style={{
-                fontSize: titleLength <= 20 ? 100 : 80,
-                paddingRight: 260,
-                fontWeight: 800,
-                paddingBottom: 40,
-              }}
+              style={
+                {
+                  fontSize: titleLength <= 20 ? 100 : 80,
+                  paddingRight: 260,
+                  fontWeight: 800,
+                  paddingBottom: 40,
+                  textWrap: 'balance',
+                } as any
+              }
             >
               {title}
             </div>
