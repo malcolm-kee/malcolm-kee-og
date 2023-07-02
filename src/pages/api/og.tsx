@@ -7,15 +7,15 @@ export const config = {
 };
 
 const font = fetch(
-  'https://fonts.cdnfonts.com/s/19795/Inter-Regular.woff'
+  'https://fonts.cdnfonts.com/s/29947/ChakraPetch-Regular.woff'
 ).then((res) => res.arrayBuffer());
 
 const semiBoldFont = fetch(
-  'https://fonts.cdnfonts.com/s/19795/Inter-SemiBold.woff'
+  'https://fonts.cdnfonts.com/s/29947/ChakraPetch-SemiBold.woff'
 ).then((res) => res.arrayBuffer());
 
 const extraBoldFont = fetch(
-  'https://fonts.cdnfonts.com/s/19795/Inter-ExtraBold.woff'
+  'https://fonts.cdnfonts.com/s/29947/ChakraPetch-Bold.woff'
 ).then((res) => res.arrayBuffer());
 
 export default async function OgImage(req: NextRequest) {
