@@ -1,22 +1,19 @@
-/* eslint-disable @next/next/no-img-element */
-import { ImageResponse } from '@vercel/og';
-import type { NextRequest } from 'next/server';
-
-export const config = {
-  runtime: 'edge',
-};
+import { ImageResponse } from 'next/og';
 
 const f = (url: string) => fetch(url).then((res) => res.arrayBuffer());
 const fontBase = 'https://fonts.cdnfonts.com/s/29947';
 
 const font = f(`${fontBase}/ChakraPetch-Regular.woff`);
 
+const semiBoldFont = f(`${fontBase}/ChakraPetch-SemiBold.woff`);
+
 const extraBoldFont = f(`${fontBase}/ChakraPetch-Bold.woff`);
 
-export default async function OgImage(req: NextRequest) {
+export async function GET(req: Request) {
   try {
-    const [fontData, extraBoldFontData] = await Promise.all([
+    const [fontData, semiBoldFontData, extraBoldFontData] = await Promise.all([
       font,
+      semiBoldFont,
       extraBoldFont,
     ]);
 
@@ -151,6 +148,12 @@ export default async function OgImage(req: NextRequest) {
             data: fontData,
             style: 'normal',
             weight: 400,
+          },
+          {
+            name: 'Inter',
+            data: semiBoldFontData,
+            style: 'normal',
+            weight: 600,
           },
           {
             name: 'Inter',
