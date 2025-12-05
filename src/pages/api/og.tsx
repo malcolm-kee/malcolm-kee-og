@@ -6,23 +6,19 @@ export const config = {
   runtime: 'edge',
 };
 
-const font = fetch(
-  'https://fonts.cdnfonts.com/s/29947/ChakraPetch-Regular.woff'
-).then((res) => res.arrayBuffer());
+const f = (url: string) => fetch(url).then((res) => res.arrayBuffer());
+const fontBase = 'https://fonts.cdnfonts.com/s/29947';
 
-const semiBoldFont = fetch(
-  'https://fonts.cdnfonts.com/s/29947/ChakraPetch-SemiBold.woff'
-).then((res) => res.arrayBuffer());
+const font = f(`${fontBase}/ChakraPetch-Regular.woff`);
 
-const extraBoldFont = fetch(
-  'https://fonts.cdnfonts.com/s/29947/ChakraPetch-Bold.woff'
-).then((res) => res.arrayBuffer());
+const extraBoldFont = f(`${fontBase}/ChakraPetch-Bold.woff`);
 
 export default async function OgImage(req: NextRequest) {
   try {
-    const fontData = await font;
-    const semiBoldFontData = await semiBoldFont;
-    const extraBoldFontData = await extraBoldFont;
+    const [fontData, extraBoldFontData] = await Promise.all([
+      font,
+      extraBoldFont,
+    ]);
 
     const { searchParams } = new URL(req.url);
 
@@ -155,12 +151,6 @@ export default async function OgImage(req: NextRequest) {
             data: fontData,
             style: 'normal',
             weight: 400,
-          },
-          {
-            name: 'Inter',
-            data: semiBoldFontData,
-            style: 'normal',
-            weight: 600,
           },
           {
             name: 'Inter',
